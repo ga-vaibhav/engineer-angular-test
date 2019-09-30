@@ -1,0 +1,28 @@
+<input type="text" class="form-control" style="padding:8px;margin:15px auto;width:30%;"
+  placeholder="Type to filter the name column..." (keyup)="onSearch($event)" />
+<ngx-datatable #table class="material" [sortType]="'multi'" [rowHeight]="'auto'" [rows]="posts" [columnMode]="'force'"
+  [selectionType]="'single'" (activate)="openPostModal($event)" [footerHeight]="40" [limit]="10">
+  <ngx-datatable-column name="Title">
+    <ng-template ngx-datatable-cell-template let-value="value">
+      {{value}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Author">
+    <ng-template ngx-datatable-cell-template let-value="value">
+      {{value}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="URL">
+    <ng-template ngx-datatable-cell-template let-value="value">
+      <a [href]="value" target="_blank" class="post-url" (click)="$event.stopPropagation()">{{value}}</a>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="created_at" name="Date Published">
+    <ng-template ngx-datatable-cell-template let-value="value">
+      {{value | date : 'dd/MM/yyyy hh:mm:ss'}}
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
